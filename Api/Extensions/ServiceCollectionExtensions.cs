@@ -4,6 +4,7 @@ using Infrastructure.DataService;
 using JWT;
 using JWT.Algorithms;
 using JWT.Extensions.AspNetCore.Factories;
+using Service;
 
 namespace Api.Extensions;
 
@@ -11,15 +12,15 @@ public static class ServiceCollectionExtensions
 {
     public static void AddDependencyInjection(this IServiceCollection services)
     {
-        //services.AddTransient<IWeatherService, WeatherService>();
         services.AddTransient<IJwtGenerator, JwtGenerator>();
+        services.AddTransient<IAppUserService, AppUserService>();
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<IPostService, PostService>();
         services.AddSingleton(_ => ECDsa.Create());
 
         services.AddJwtDependencies();
 
-        //services.AddSingleton<IWeatherRepository, WeatherRepository>();
-        services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<IAppUserRepository, AppUserRepository>();
     }
 
     private static void AddJwtDependencies(this IServiceCollection services)

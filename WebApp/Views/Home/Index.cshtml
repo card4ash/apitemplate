@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_LayoutChameleonAdmin.cshtml";
+}
+
+@section StyleSection
+{
+    
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+}
+
+<section id="icon-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row" id="menuInfo">
+                        <div class="col-6"><h4 class="card-title">Menu Information</h4></div>
+                        <div class="col-6"><div class="pull-right"><a href="#" class="addMenu btn btn-lg btn-icon btn-primary btn-round btn-large" data-rel="tooltip" title="Add Menu"><i class="ft-plus-square"></i></a></div></div>
+                    </div>
+
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <table id="menuTable" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th> URL </th>
+                                    <th> Sequence </th>
+                                    <th> Icon </th>
+                                    <th>Is Active?</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modalMenu" role="dialog" aria-labelledby="exampleModalLabel" style="z-index:1051;">
+    <div class="modal-dialog modal-xl" role="document" style="margin-left:10%;">
+        <div class="modal-content">
+            <div class="modal-header bg-info white">
+                <h5 class="modal-title white">Menu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="btnSaveMenu" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card">
+
+</div>
+
+
+
+@section ScriptSection
+{
+
+    <script>
+        var $loading = $('#overlay').hide();
+    </script>
+
+}

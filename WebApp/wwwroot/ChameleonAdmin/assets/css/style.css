@@ -1,0 +1,159 @@
+/* ================================================================================================
+// 	File Name: style.scss
+// 	Description: Style for customization.
+// 	----------------------------------------------------------------------------------------------
+// 	Item Name: Chameleon Admin - Modern Bootstrap 4 WebApp & Dashboard HTML Template + UI Kit
+// 	Version: 1.0
+// 	Author: ThemeSelection
+// 	Author URL: https://themeselection.com/
+// ================================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.font-bold {
+    font-weight: bold;
+}
+/* Data Table */
+.table tr {
+    white-space: nowrap;
+    width: 100px !important;
+}
+
+.table tbody tr td {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
+    max-width: 350px;
+}
+
+.text-wrap {
+    white-space: normal;
+}
+
+.width-250 {
+    width: 350px;
+}
+
+.displayNone {
+    display: none;
+}
+
+.dataTables_scroll {
+    overflow: auto;
+}
+/* END Data Table */
+
+
+.card-header {
+    padding: 1rem 1rem !important;
+    font-family: Arial !important;
+}
+
+.header-navbar {
+    font-family: Arial !important;
+}
+
+.navigation {
+    font-family: "Segoe UI" !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Arial";
+    color: #464855;
+}
+
+html body .content .content-wrapper {
+    padding: 0.5rem !important;
+}
+
+/*.custom-card-footer {
+    background-color: rgba(130,120,120,0.13);
+}*/
+
+/*
+
+
+
+/*.modal-body {
+    padding: 0.3rem;
+}*/
+
+/*.modal-header {
+    padding: 0.3rem;
+    border-bottom: 0.2px solid transparent;
+}*/
+
+/*.nav.nav-tabs .nav-item .nav-link {
+    padding: 1.5rem 1rem;
+}
+*/
+
+
+.card-body {
+    /* font-size: 1.0rem;*/
+    /* padding: 0.75rem;*/
+    padding-top: 0.25rem !important;
+}
+
+body.vertical-layout[data-color=bg-gradient-x-purple-red] .navbar-container, body.vertical-layout[data-color=bg-gradient-x-purple-red] .content-wrapper-before {
+    background-image: linear-gradient(to right, #1976d2, #28afd0);
+    /* background-image: linear-gradient(to right,#564F4E, #564F4E);*/
+    /*    background-image: linear-gradient(to right, #6b6f80, #6b6f80);*/
+    /*   background-image: linear-gradient(to right, #6967ce, #6967ce);*/
+    background-repeat: repeat-x;
+}
+
+.nav.nav-tabs .nav-item .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+.modal-header {
+    padding: 1rem;
+    border-bottom: 0.2px solid transparent;
+    background-color: #e5e0f5;
+}
+
+.card-header {
+    font-family: Arial !important;
+    color: white !important;
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #e5e0f5;
+    border-bottom: 0px solid rgba(0,0,0,.8);
+}
+
+.card-bordered-child-app {
+    border: 1px solid #1b7ed2 !important;
+}
+
+.card-bordered-parent-app {
+    border: 2px solid #373e4c !important;
+}
+
+.grid-buttons-margin {
+    margin: auto;
+}
+.section-head {
+    width: 100%;
+    border-bottom: 1px solid #bbb;
+    line-height: 0.1em;
+    margin: 20px 0 20px;
+}
+
+.section-head span {
+    background: #fff;
+    padding: 0 10px;
+}
+.error {
+    color: #ff0000 !important;
+}
+label.error {
+    float: none;
+    color: red;
+    padding-left: .5em;
+    vertical-align: top;
+    display: block;
+}

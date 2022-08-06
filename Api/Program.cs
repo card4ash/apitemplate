@@ -8,6 +8,7 @@ using FluentValidation.AspNetCore;
 using JWT.Extensions.AspNetCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Api.Validation;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -60,7 +61,7 @@ try
     });
     });
 
-    builder.Services.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<Program>());
+    builder.Services.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<UserValidator>());
 
     JsonConvert.DefaultSettings = () => new JsonSerializerSettings
     {
@@ -84,8 +85,8 @@ try
     var app = builder.Build();
     app.UseSerilogRequestLogging();
 
-    app.UseAuthentication();
-    app.UseJwtAuthentication();
+    //app.UseAuthentication();
+    //app.UseJwtAuthentication();
 
     if (app.Environment.IsDevelopment())
     {
@@ -94,7 +95,9 @@ try
         {
             c.DocumentTitle = "Placeholder Gateway - Swagger";
             c.RoutePrefix = string.Empty;
-            c.SwaggerEndpoint($"{builder.Configuration.GetSwaggerBase()}/swagger/v1/swagger.json", "v1");
+            //c.SwaggerEndpoint($"{builder.Configuration.GetSwaggerBase()}/swagger/v1/swagger.json", "v1");
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            c.RoutePrefix = "swagger";
         });
     }
 

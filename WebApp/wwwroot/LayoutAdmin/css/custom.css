@@ -1,0 +1,79 @@
+﻿.required:after {
+    content: " * ";
+    color: red;
+}
+
+.displayNone {
+    display: none;
+}
+
+.bigger-120 {
+    font-size: 120% !important
+}
+
+.bigger-150 {
+    font-size: 150% !important
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: #ff0000;
+}
+
+table.dataTable {
+    width: 100% !important;
+}
+
+.table td {
+    padding: 3px 11px 3px 11px !important;
+}
+
+.action {
+    width: 80px !important;
+}
+
+.notifications {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+    .notifications .fa {
+        color: #cecece;
+        line-height: 60px;
+        font-size: 20px;
+    }
+
+    .notifications .num {
+        position: absolute;
+        top: -11px;
+        right: -11px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #9c1998;
+        color: #fff;
+        line-height: 40px;
+        font-size: small;
+        text-align: center;
+    }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+    .cursor-pointer:hover {
+        background-color: #499f9f;
+    }
+
+.cursor-pointer-noColor {
+    cursor: pointer;
+}
+
+.alert {
+    padding: 1rem 5rem 1rem 5rem !important;
+    margin: 3px !important;
+    border-radius: 2rem !important;
+}
+
