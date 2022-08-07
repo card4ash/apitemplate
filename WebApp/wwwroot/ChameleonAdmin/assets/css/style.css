@@ -157,3 +157,8 @@ label.error {
     vertical-align: top;
     display: block;
 }
+
+.error {
+    color: red;
+}
+

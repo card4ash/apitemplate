@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
+using WebApp.Extensions;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -13,7 +15,14 @@ try
         .ReadFrom.Configuration(ctx.Configuration));
 
     // Add services to the container.
+    builder.Services.AddDependencyInjection();
     builder.Services.AddControllersWithViews();
+    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    option.LoginPath = new PathString("/Account/Login");
+                });
 
     var app = builder.Build();
 
@@ -21,15 +30,19 @@ try
     if (!app.Environment.IsDevelopment())
     {
         app.UseExceptionHandler("/Home/Error");
-        app.UseHsts();
     }
-
+    app.UseHsts();
     app.UseHttpsRedirection();
     app.UseStaticFiles();
 
     app.UseRouting();
-
+    app.UseAuthentication();
     app.UseAuthorization();
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+        await next();
+    });
 
     app.MapControllerRoute(
         name: "default",

@@ -3,15 +3,7 @@
     Layout = "~/Views/Shared/_LayoutChameleonAdmin.cshtml";
 }
 
-@section StyleSection
-{
-    
-    <style>
-        .error {
-            color: red;
-        }
-    </style>
-}
+
 
 <section id="icon-tabs">
     <div class="row">
@@ -19,23 +11,22 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row" id="menuInfo">
-                        <div class="col-6"><h4 class="card-title">Menu Information</h4></div>
-                        <div class="col-6"><div class="pull-right"><a href="#" class="addMenu btn btn-lg btn-icon btn-primary btn-round btn-large" data-rel="tooltip" title="Add Menu"><i class="ft-plus-square"></i></a></div></div>
+                        <div class="col-6"><h4 class="card-title">Users</h4></div>
                     </div>
 
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                        <table id="menuTable" class="table table-striped table-bordered table-hover">
+                        <table id="userTable" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Action</th>
-                                    <th>Code</th>
                                     <th>Name</th>
-                                    <th> URL </th>
-                                    <th> Sequence </th>
-                                    <th> Icon </th>
-                                    <th>Is Active?</th>
+                                    <th>Username</th>
+                                    <th> Email </th>
+                                    <th> Phone </th>
+                                    <th> Website </th>
+                                    <th>Company Name</th>
                                 </tr>
                             </thead>
                         </table>
@@ -76,9 +67,5 @@
 
 @section ScriptSection
 {
-
-    <script>
-        var $loading = $('#overlay').hide();
-    </script>
-
+    <script src="~/js/app/home.js"></script>
 }
