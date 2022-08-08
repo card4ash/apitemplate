@@ -92,9 +92,6 @@ try
     var app = builder.Build();
     app.UseSerilogRequestLogging();
 
-    //app.UseAuthentication();
-    //app.UseJwtAuthentication();
-
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
@@ -108,12 +105,11 @@ try
         });
     }
     app.UseCors("corsapp");
+    app.UseAuthentication();
+    app.UseJwtAuthentication();
+    app.UseAuthorization();
     app.UseHttpsRedirection();
-
-    //app.UseAuthorization();
-
     app.MapControllers();
-
     app.Run();
 }
 catch (Exception ex)
