@@ -3,8 +3,11 @@
     var userId = $('#hdUserId').val();
     LoadData(userId);
     $.ajax({
-        url: 'https://jsonplaceholder.typicode.com/users',
+        url: 'https://localhost:7156/api/users',
         dataType: 'JSON',
+        headers: {
+            'Authorization': 'Bearer '+ window.localStorage.getItem('token')
+        },
         contentType: "application/json",
         type: "GET",
         data: { id: userId },
@@ -90,8 +93,11 @@ function LoadData(userId) {
         "scrollX": true,
         "autoWidth": false,
         "ajax": {
-            "url": "https://jsonplaceholder.typicode.com/posts",
+            "url": "https://localhost:7156/api/posts",
             "type": "GET",
+            "headers": {
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+            },
             "data": { userId: userId },
             "dataType": "json",
             "dataSrc": ""

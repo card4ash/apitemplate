@@ -8,6 +8,7 @@ using WebApp.Models;
 using Infrastructure.DataService;
 using Microsoft.AspNetCore.Authentication;
 using WebApp.Helpers;
+using Service.Token;
 
 namespace WebApp.Controllers;
 
@@ -17,14 +18,17 @@ public class AccountController : Controller
 
     private readonly IConfiguration _configuration;
     private readonly IAppUserService _appUserService;
+    private readonly ITokenService _tokenService;
 
     public AccountController(ILogger<AccountController> logger,
         IConfiguration configuration,
-        IAppUserService appUserService)
+        IAppUserService appUserService,
+        ITokenService tokenService)
     {
         _logger = logger;
         _configuration = configuration;
         _appUserService = appUserService;
+        _tokenService = tokenService;
     }
 
     [AllowAnonymous]
@@ -50,7 +54,8 @@ public class AccountController : Controller
         {
             if (_appUserService.TryLogin(model.UserName,model.Password))
             {
-                
+                var token = await _tokenService.GetToken(model.UserName, model.Password);
+                TempData["token"] = token.Replace("\"", "");
                 var principal = CreatePrincipal(model.UserName);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 

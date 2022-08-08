@@ -17,6 +17,10 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        if (TempData["token"] != null) 
+        {
+            ViewBag.Token = TempData["token"];
+        }
         return View();
     }
 

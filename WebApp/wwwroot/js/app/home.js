@@ -19,7 +19,7 @@ function LoadData() {
         "scrollX": true,
         "autoWidth": true,
         "ajax": {
-            "url": "https://jsonplaceholder.typicode.com/users",
+            "url": "https://localhost:7156/api/users",
             "type": "GET",
             "dataType": "json",
             "dataSrc": ""

@@ -1,5 +1,6 @@
 ﻿using Infrastructure.DataAccess;
 using Infrastructure.DataService;
+using Service.Token;
 
 namespace WebApp.Extensions;
 
@@ -9,5 +10,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<IAppUserService, AppUserService>();
         services.AddSingleton<IAppUserRepository, AppUserRepository>();
+        services.AddSingleton<ITokenService, TokenService>();
     }
 }

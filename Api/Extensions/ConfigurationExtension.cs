@@ -11,4 +11,12 @@ public static class ConfigurationExtension
     {
         return configuration.GetValue<string>("Secret") ?? throw new Exception("Secret must be set");
     }
+    public static string GetRedisUrl(this IConfiguration configuration)
+    {
+        return configuration.GetValue<string>("RedisCacheUrl") ?? throw new Exception("Redis Cache Url must be set");
+    }
+    public static bool GetEnableCache(this IConfiguration configuration)
+    {
+        return configuration.GetValue<bool?>("enableCache") ?? throw new Exception("Redis Cache Url must be set");
+    }
 }

@@ -61,6 +61,11 @@ try
     });
     });
 
+    builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+    {
+        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    }));
+
     builder.Services.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<UserValidator>());
 
     JsonConvert.DefaultSettings = () => new JsonSerializerSettings
@@ -78,9 +83,11 @@ try
         .AddJwt(options =>
         {
             options.Keys = new[] { builder.Configuration.GetSecret() };
-        //options.Keys = null;
+            //options.Keys = null;
             options.VerifySignature = true;
         });
+
+    builder.Services.AddStackExchangeRedisCache(options => { options.Configuration = builder.Configuration.GetRedisUrl(); });
 
     var app = builder.Build();
     app.UseSerilogRequestLogging();
@@ -100,7 +107,7 @@ try
             c.RoutePrefix = "swagger";
         });
     }
-
+    app.UseCors("corsapp");
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
