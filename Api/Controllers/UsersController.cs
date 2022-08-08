@@ -44,7 +44,7 @@ public class UsersController : BaseController
             async () =>
             {
                 return await GetAllUser();
-            }, Request, Role.None);
+            }, Request, Role.Read);
     }
 
     private async Task<IActionResult> GetAllUser()
@@ -85,10 +85,42 @@ public class UsersController : BaseController
         return HandleRequest(
              async () =>
             {
-                var response = await _userService.GetUserById(id);
-                return Ok(response);
-            }, Request, Role.None);
+                return await GetUserById(id);
+            }, Request, Role.Read);
     }
+
+    private async Task<IActionResult> GetUserById(int id)
+    {
+        var enableCache = _configuration.GetEnableCache();
+        if (!enableCache)
+        {
+            var users = await _userService.GetUserById(id);
+            return Ok(users);
+        }
+        string cacheKey = "user"+id.ToString();
+        byte[] cachedData = await _cache.GetAsync(cacheKey);
+        if (cachedData != null)
+        {
+            var cachedDataString = Encoding.UTF8.GetString(cachedData);
+            return Ok(cachedDataString);
+        }
+        else
+        {
+            var user = await _userService.GetUserById(id);
+            var dataToCache = Encoding.UTF8.GetBytes(user);
+
+            // Setting up the cache options
+            DistributedCacheEntryOptions options = new DistributedCacheEntryOptions()
+                .SetAbsoluteExpiration(DateTime.Now.AddMinutes(5))
+                .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+            // Add the data into the cache
+            await _cache.SetAsync(cacheKey, dataToCache, options);
+            return Ok(user);
+        }
+    }
+
+
     [Route("api/posts")]
     [HttpGet]
     public Task<IActionResult> GetPostsByUserId([FromQuery] int userid)
@@ -98,7 +130,7 @@ public class UsersController : BaseController
              {
                  var response = await _postService.GetPostsByUserId(userid);
                  return Ok(response);
-             }, Request, Role.None);
+             }, Request, Role.Read);
     }
     [Route("api/users/{userid:int}/posts")]
     [HttpGet]
@@ -109,7 +141,38 @@ public class UsersController : BaseController
              {
                  var response = await _postService.GetPostsByUserId(userid);
                  return Ok(response);
-             }, Request, Role.None);
+             }, Request, Role.Read);
     }
 
+
+    private async Task<IActionResult> GetUserPostById(int userid)
+    {
+        var enableCache = _configuration.GetEnableCache();
+        if (!enableCache)
+        {
+            var users = await _postService.GetPostsByUserId(userid);
+            return Ok(users);
+        }
+        string cacheKey = "post" + userid.ToString();
+        byte[] cachedData = await _cache.GetAsync(cacheKey);
+        if (cachedData != null)
+        {
+            var cachedDataString = Encoding.UTF8.GetString(cachedData);
+            return Ok(cachedDataString);
+        }
+        else
+        {
+            var user = await _postService.GetPostsByUserId(userid);
+            var dataToCache = Encoding.UTF8.GetBytes(user);
+
+            // Setting up the cache options
+            DistributedCacheEntryOptions options = new DistributedCacheEntryOptions()
+                .SetAbsoluteExpiration(DateTime.Now.AddMinutes(5))
+                .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+            // Add the data into the cache
+            await _cache.SetAsync(cacheKey, dataToCache, options);
+            return Ok(user);
+        }
+    }
 }

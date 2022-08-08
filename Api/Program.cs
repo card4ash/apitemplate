@@ -63,7 +63,7 @@ try
 
     builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     {
-        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+        builder.WithOrigins("https://localhost:7231").AllowAnyMethod().AllowAnyHeader();
     }));
 
     builder.Services.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<UserValidator>());
@@ -110,7 +110,7 @@ try
     app.UseCors("corsapp");
     app.UseHttpsRedirection();
 
-    app.UseAuthorization();
+    //app.UseAuthorization();
 
     app.MapControllers();
 

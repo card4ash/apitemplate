@@ -20,6 +20,10 @@ function LoadData() {
         "autoWidth": true,
         "ajax": {
             "url": "https://localhost:7156/api/users",
+            "headers": {
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
+                'Access-Control-Allow-Origin':'*'
+            },
             "type": "GET",
             "dataType": "json",
             "dataSrc": ""

@@ -9,6 +9,7 @@ Log.Logger = new LoggerConfiguration()
 Log.Information("Application Started!!");
 try
 {
+    var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console()
@@ -16,6 +17,15 @@ try
 
     // Add services to the container.
     builder.Services.AddDependencyInjection();
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("*");
+                          });
+    });
+
     builder.Services.AddControllersWithViews();
     builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
@@ -36,13 +46,14 @@ try
     app.UseStaticFiles();
 
     app.UseRouting();
+    app.UseCors(MyAllowSpecificOrigins);
     app.UseAuthentication();
     app.UseAuthorization();
-    app.Use(async (context, next) =>
-    {
-        context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
-        await next();
-    });
+    //app.Use(async (context, next) =>
+    //{
+    //    context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+    //    await next();
+    //});
 
     app.MapControllerRoute(
         name: "default",

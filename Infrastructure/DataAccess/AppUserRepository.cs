@@ -7,7 +7,7 @@ public class AppUserRepository : IAppUserRepository
     private readonly Dictionary<string, string> _usersAndPasswords = new()
     {
         { "admin", "admin" },
-        { "noob", "password" }
+        { "noob", "noob" }
     };
     
     public IEnumerable<Role> GetRolesForUser(string username)
@@ -22,6 +22,7 @@ public class AppUserRepository : IAppUserRepository
                 yield return Role.Read;
                 yield break;
             default:
+                yield return Role.Read;
                 yield return Role.None;
                 yield break;
         }

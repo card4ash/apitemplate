@@ -68,9 +68,12 @@
 @section ScriptSection
 {
 <script>
-//var token = '@ViewBag.Token';
-//window.localStorage.setItem('token', token);
-//console.log(token);
+var token = '@ViewBag.Token';
+if (token != null && token) {
+window.localStorage.setItem('token', token);
+}
+
+console.log(token);
 </script>
 <script src="~/js/app/home.js"></script>
 
